@@ -1,0 +1,6 @@
+*.iml
+.idea
+grails
+grails-war-exec-*.zip
+plugin.xml
+target
