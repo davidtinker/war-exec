@@ -7,7 +7,6 @@ eventCreateWarStart = { String warName, File stagingDir ->
     libDir.eachFileMatch(~/tomcat-servlet-api-.*\.jar/) { jarsToUnpack << it }
 
     jarsToUnpack.each {
-        println it
         ant.unjar(src: it, dest: "${stagingDir}") {
             ant.patternset() {
                 ant.exclude(name: "META-INF/**")
@@ -32,6 +31,12 @@ eventCreateWarStart = { String warName, File stagingDir ->
     p.setProperty("jetty.port", port as String)
 
     Map cfg = new ConfigSlurper(grailsEnv).parse(new File(baseFile, "grails-app/conf/Config.groovy").text).flatten()
+
+    String contextPath = System.getProperty("app.context") ?: bc.get('app.context') ?: cfg.get('grails.app.context')
+    if (!contextPath) contextPath = "production" == grailsEnv ? "/" : grailsAppName
+    if (!contextPath.startsWith("/")) contextPath = "/" + contextPath
+    p.setProperty("jetty.context.path", contextPath)
+
     cfg.each { k, v ->
         if (k instanceof String && k.startsWith("jetty.")) p.setProperty(k as String, v as String)
     }

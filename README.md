@@ -32,6 +32,7 @@ other properties in Config.groovy (and have different values for different envir
 
     jetty.host=127.0.0.1
     jetty.port=8080
+    jetty.context.path=... // defaults "/" for production wars otherwise to what grails run-app uses
     jetty.max.threads=254
     jetty.min.threads=8
     jetty.tmp=...    // where the war file is unpacked, defaults to ${user.home}/.jetty-tmp

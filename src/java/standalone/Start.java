@@ -53,7 +53,7 @@ public class Start {
 
         WebAppContext context = new WebAppContext();
         context.setServer(server);
-        context.setContextPath("/");
+        context.setContextPath(p.getProperty("jetty.context.path", "/"));
         context.setTempDirectory(new File(temp, war.getName()));
         context.setWar(war.toString());
 
