@@ -14,7 +14,7 @@ Install the plugin:
 Add a dependency to BuildConfig.groovy:
 
     plugins {
-        runtime ":war-exec:1.0.0"
+        runtime ":war-exec:1.0.2"
         ...
     }
 
@@ -40,6 +40,14 @@ other properties in Config.groovy (and have different values for different envir
 These be overridden using system properties:
 
     java -Djetty.host=0.0.0.0 -jar myapp.jar
+
+The jetty.host property can contain more than one host separated by commas:
+
+    jetty.host=127.0.0.1,192.168.0.23
+
+Additionally each host can have its own port (use / as separator from the host address):
+
+    jetty.host=127.0.0.1,192.168.0.23/8000
 
 
 How It Works
@@ -78,3 +86,8 @@ Then you can configure the virtual hosts to proxy your application:
 
 Note that this works with HTTPS virtual hosts as well.
 
+
+Changelog
+---------
+
+1.0.2: 7 Jan 2013: Added support for listening on multiple hosts with different ports.

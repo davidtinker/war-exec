@@ -35,11 +35,25 @@ public class Start {
         tp.setMinThreads(Integer.parseInt(p.getProperty("jetty.min.threads", "8")));
         server.setThreadPool(tp);
 
-        SelectChannelConnector connector = new SelectChannelConnector();
-        connector.setHost(p.getProperty("jetty.host", "127.0.0.1"));
-        connector.setPort(Integer.parseInt(p.getProperty("jetty.port", "8080")));
-
-        server.setConnectors(new Connector[]{connector});
+        String[] hosts = p.getProperty("jetty.host", "127.0.0.1").split("[\\s]*,[\\s]*");
+        int defaultPort = Integer.parseInt(p.getProperty("jetty.port", "8080"));
+        Connector[] connectors = new Connector[hosts.length];
+        for (int i = 0; i < hosts.length; i++) {
+            SelectChannelConnector connector = new SelectChannelConnector();
+            String host = hosts[i];
+            int port;
+            int j = host.indexOf('/');
+            if (j < 0) {
+                port = defaultPort;
+            } else {
+                port = Integer.parseInt(host.substring(j + 1));
+                host = host.substring(0, j);
+            }
+            connector.setHost(host);
+            connector.setPort(port);
+            connectors[i] = connector;
+        }
+        server.setConnectors(connectors);
 
         File war = new File(Start.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm());
 
