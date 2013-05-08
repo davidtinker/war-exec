@@ -14,7 +14,7 @@ Install the plugin:
 Add a dependency to BuildConfig.groovy:
 
     plugins {
-        runtime ":war-exec:1.0.2"
+        runtime ":war-exec:1.0.3"
         ...
     }
 
