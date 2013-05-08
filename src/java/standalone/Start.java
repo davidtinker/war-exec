@@ -51,6 +51,7 @@ public class Start {
             }
             connector.setHost(host);
             connector.setPort(port);
+            connector.setForwarded(true);
             connectors[i] = connector;
         }
         server.setConnectors(connectors);
