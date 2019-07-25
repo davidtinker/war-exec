@@ -67,6 +67,7 @@ public class Start {
         }
 
         WebAppContext context = new WebAppContext();
+        context.setInitParameter("org.eclipse.jetty.servlet.Default.dirAllowed", "false");
         context.setServer(server);
         context.setContextPath(p.getProperty("jetty.context.path", "/"));
         context.setTempDirectory(new File(temp, war.getName()));

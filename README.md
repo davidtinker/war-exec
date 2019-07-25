@@ -14,7 +14,7 @@ Install the plugin:
 Add a dependency to BuildConfig.groovy:
 
     plugins {
-        runtime ":war-exec:1.0.3"
+        runtime ":war-exec:1.0.4"
         ...
     }
 
@@ -89,6 +89,8 @@ Note that this works with HTTPS virtual hosts as well.
 
 Changelog
 ---------
+
+1.0.4: 25 July 2019: Jetty directory listing disabled
 
 1.0.3: 8 May 2013: Jetty connector now has forwarded=true so X-Forwarded-For etc. are picked up and
   request.getRemoteAddr() works properly
